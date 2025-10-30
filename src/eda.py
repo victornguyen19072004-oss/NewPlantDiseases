@@ -7,16 +7,15 @@ import seaborn as sns
 from collections import Counter
 from torchvision import datasets
 
-# === CẤU HÌNH THƯ MỤC ===
+# Thiết lập đường dẫn thư mục lưu trữ
 PLOTS_DIR = "plots"
 REPORTS_DIR = "reports"
 os.makedirs(PLOTS_DIR, exist_ok=True)
 os.makedirs(REPORTS_DIR, exist_ok=True)
 sns.set_style("whitegrid")
 
-# === TẢI SỐ LƯỢNG MẪU MỖI LỚP ===
+# Tải số lượng mẫu mỗi lớp từ bộ dữ liệu
 def load_dataset_counts(train_dir: str, valid_dir: str):
-    """Đọc dataset → trả về danh sách lớp và số mẫu."""
     train_ds = datasets.ImageFolder(train_dir)
     valid_ds = datasets.ImageFolder(valid_dir)
     
@@ -29,7 +28,7 @@ def load_dataset_counts(train_dir: str, valid_dir: str):
     
     return classes, train_counts, valid_counts, train_ds, valid_ds
 
-# === TẠO DATAFRAME CHI TIẾT ===
+# Tạo dataframe chi tiết
 def create_eda_dataframe(classes, train_counts, valid_counts):
     """Tạo bảng thống kê: cây, lớp, train, valid, tổng."""
     data = []
@@ -50,13 +49,13 @@ def create_eda_dataframe(classes, train_counts, valid_counts):
     df.to_csv(f"{REPORTS_DIR}/plantDS.csv", index=False, encoding="utf-8")
     return df
 
-# === HÀM LƯU BIỂU ĐỒ ===
+# Hàm lưu trữ biểu đồ
 def save_plot(fig, path: str):
     """Lưu biểu đồ với chất lượng cao."""
     fig.savefig(path, dpi=150, bbox_inches='tight')
     plt.close(fig)
 
-# === BIỂU ĐỒ 1: PHÂN BỐ THEO LỚP ===
+# Phân bổ ảnh của mỗi lớp
 def plot_class_distribution(df):
     """Biểu đồ cột: số ảnh mỗi lớp."""
     fig, ax = plt.subplots(figsize=(14, 6))
@@ -66,7 +65,7 @@ def plot_class_distribution(df):
     ax.set_ylabel("Số ảnh")
     save_plot(fig, f"{PLOTS_DIR}/eda_class_distribution.png")
 
-# === BIỂU ĐỒ 2: TRAIN VS VALID ===
+# Kiểm tra số ảnh của tập valid và tập train
 def plot_train_valid_split(df):
     """Biểu đồ nhóm: so sánh train/valid."""
     df_melt = df.melt(id_vars="Lớp", value_vars=["Train", "Valid"], var_name="Split", value_name="Số ảnh")
@@ -77,10 +76,10 @@ def plot_train_valid_split(df):
     ax.legend(title="Split")
     save_plot(fig, f"{PLOTS_DIR}/eda_train_valid_split.png")
 
-# === BIỂU ĐỒ 3 & 4: TOP 10 NHIỀU / ÍT ===
+# Biểu đồ in ra biểu đồ top 10 class có số ảnh nhiều nhất & ngược lại
 def plot_top_bottom_classes(df):
     """Vẽ 2 biểu đồ: top 10 nhiều & ít ảnh."""
-    # Top 10 nhiều
+    # Top 10 classes có ảnh nhiều nhất
     top10 = df.head(10)
     fig, ax = plt.subplots(figsize=(10, 5))
     sns.barplot(data=top10, x="Lớp", y="Tổng", hue="Lớp", ax=ax, palette="Greens_d", legend=False)
@@ -88,7 +87,7 @@ def plot_top_bottom_classes(df):
     ax.tick_params(axis='x', rotation=45, ha='right')
     save_plot(fig, f"{PLOTS_DIR}/eda_top10_classes.png")
 
-    # Top 10 ít
+    # Top 10 classes có ảnh ít nhất
     bottom10 = df.tail(10)
     fig, ax = plt.subplots(figsize=(10, 5))
     sns.barplot(data=bottom10, x="Lớp", y="Tổng", hue="Lớp", ax=ax, palette="Reds_d", legend=False)
@@ -96,7 +95,7 @@ def plot_top_bottom_classes(df):
     ax.tick_params(axis='x', rotation=45, ha='right')
     save_plot(fig, f"{PLOTS_DIR}/eda_bottom10_classes.png")
 
-# === BIỂU ĐỒ 5: SỐ LỚP BỆNH MỖI CÂY ===
+# Biểu đồ số lớp bệnh mỗi cây
 def plot_plant_distribution(df):
     """Biểu đồ cột: số lớp bệnh mỗi loại cây."""
     plant_counts = df["Loại cây"].value_counts().reset_index()
@@ -109,7 +108,7 @@ def plot_plant_distribution(df):
     ax.set_ylabel("Số lớp")
     save_plot(fig, f"{PLOTS_DIR}/eda_plant_distribution.png")
 
-# === KIỂM TRA IMBALANCE ===
+# Kiểm tra mất cân đối dữ liệu
 def compute_imbalance_info(train_counts, classes):
     """Tính tỷ lệ mất cân bằng."""
     counts = [train_counts.get(i, 0) for i in range(len(classes))]
@@ -124,7 +123,7 @@ def compute_imbalance_info(train_counts, classes):
         "imbalance_ratio": round(counts[max_idx] / counts[min_idx], 2)
     }
 
-# === CHẠY TOÀN BỘ EDA ===
+# Hàm chạy khám phá dữ liệu module
 def run_eda(train_dir: str, valid_dir: str):
     """Chạy toàn bộ pipeline EDA."""
     # 1. Tải dữ liệu
@@ -167,5 +166,3 @@ if __name__ == "__main__":
     train_dir = os.path.join(ds_dir, "train")
     valid_dir = os.path.join(ds_dir, "valid")
     run_eda(train_dir, valid_dir)
-    # Khám phá và phân tích bộ dữ liệu + có file JSON tóm tắ
-    # Sau khi thực thi: Các biểu đồ được lưu trữ trong plots, file json tổng quan eda, file dataframe về bộ dữ liệu 

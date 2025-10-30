@@ -1,6 +1,8 @@
-# BackBone là phần xử lý các dữ liệu hình ảnh đầu vào chuyển thành các số liệu cho mô hình
-# Khi dùng BackBone xử lý và chuyển đổi hình ảnh thành các đặc trưng có ý nghĩa như: Cạnh, kết cấu, hình dạng,...
+# feature_engineering.py
+# Mục đích: Trích xuất Vector Đặc trưng (Feature Vectors) từ các mô hình CNN (Backbones)
+#          và lưu ra file .npy để dùng cho các mô hình Machine Learning truyền thống.
 
+# Backbone: Là các lớp tích chập của các mô hình nhưng đã được loại bỏ lớp phân loại cuối cùng
 import torch
 import torch.nn as nn
 import logging
@@ -8,10 +10,10 @@ from typing import Tuple, Any
 import os
 import numpy as np
 
-# Cần import các hàm định nghĩa mô hình từ model_training.py
 try:
+    # Giả định src.preprocessing và src.model_training nằm trong thư mục src
     from src.preprocessing import get_device, load_datasets, get_dataloaders
-    from src.model_training import define_resnet18, define_mobilenetv2
+    from src.model_training import define_resnet18, define_mobilenetv2, define_cnn 
     from torchvision.models import efficientnet_b0
 except ImportError as e:
     logging.error(f"Lỗi: Không thể import từ preprocessing hoặc model_training: {e}")
@@ -20,35 +22,44 @@ except ImportError as e:
 logging.basicConfig(level=logging.INFO)
 
 
-# 1. HÀM TẢI VÀ TÁCH BACKBONE TỪ CÁC MÔ HÌNH
-
+# tải các mô hình và dùng mô hình để trích xuất đặc trưng
 def get_feature_extractor_backbone(model_name: str, num_classes: int = 38) -> nn.Module:
     """
     Tải mô hình (hoặc pre-trained) và cắt bỏ lớp phân loại cuối cùng (Classifier) 
     để chỉ giữ lại bộ trích xuất đặc trưng (Backbone).
     """
+    # ... (Các logic tách Backbone giữ nguyên) ...
     if model_name == 'ResNet18':
         model = define_resnet18(num_classes, use_pretrained=False)
         backbone = nn.Sequential(*list(model.children())[:-1], nn.Flatten())
-        logging.info("Tách ResNet18 Backbone thành công.")
+        logging.info("Trích xuất đặc trưng ResNet18 thành công.")
         return backbone
         
     elif model_name == 'MobileNetV2':
         model = define_mobilenetv2(num_classes, use_pretrained=False)
+        # MobileNetV2 features là backbone, AdaptiveAvgPool2d(1) + Flatten chuyển thành vector
         return nn.Sequential(model.features, nn.AdaptiveAvgPool2d(1), nn.Flatten())
         
     elif model_name == 'EfficientNet-B0':
         model = efficientnet_b0(weights=None)
+        # EfficientNet-B0 có 3 lớp cuối cùng là avgpool, classifier
         backbone = nn.Sequential(*list(model.children())[:-1], nn.AdaptiveAvgPool2d(1), nn.Flatten())
         logging.info("Tách EfficientNet-B0 Backbone thành công.")
+        return backbone
+    
+    elif model_name == 'CNN':
+        # Đối với mô hình tự định nghĩa, chúng ta cần cắt bỏ lớp phân loại cuối cùng
+        model = define_cnn(num_classes)
+        # Cắt bỏ lớp Linear (index -1) và lớp Dropout (index -2)
+        backbone = nn.Sequential(*list(model.children())[:-2])
+        logging.info("Tách CNN Backbone thành công.")
         return backbone
         
     else:
         raise ValueError(f"Mô hình {model_name} không được hỗ trợ để trích xuất đặc trưng.")
+    
 
-# 2. HÀM THỰC HIỆN TRÍCH XUẤT ĐẶC TRƯNG
-
-
+# Sử dụng mô hình trích xuất đặc trưng
 def extract_features(model: nn.Module, dataloader: Any, device: torch.device) -> Tuple[torch.Tensor, torch.Tensor]:
     """Hàm chạy qua DataLoader để trích xuất vector đặc trưng và nhãn tương ứng."""
     model.eval()
@@ -70,8 +81,7 @@ def extract_features(model: nn.Module, dataloader: Any, device: torch.device) ->
     return features, labels
 
 
-# 3. HÀM LƯU ĐẶC TRƯNG RA FILE
-
+# lưu vector đặ trưng và nhãn thành file .npy
 def save_features(features: torch.Tensor, labels: torch.Tensor, model_name: str, save_dir: str = 'features'):
     """Lưu vector đặc trưng và nhãn ra file numpy để dùng cho mô hình ML."""
     os.makedirs(save_dir, exist_ok=True)
@@ -84,27 +94,29 @@ def save_features(features: torch.Tensor, labels: torch.Tensor, model_name: str,
 
 
 # 4. KHỐI CHẠY CHÍNH
-
-
 if __name__ == "__main__":
-    # Chuẩn bị dữ liệu
-    ds_dir = r"E:\New_Plant_Diseases_Project\data\New Plant Diseases Dataset(Augmented)\New Plant Diseases Dataset(Augmented)"
-    train_dir = os.path.join(ds_dir, 'train')
-    valid_dir = os.path.join(ds_dir, 'valid')
+    # Lấy đường dẫn tuyệt đối 
+    CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))  
+    DS_ROOT_PATH = os.path.join(CURRENT_DIR, '..', 'data', 'New Plant Diseases Dataset(Augmented)', 'New Plant Diseases Dataset(Augmented)')
+    
+    train_dir = os.path.join(DS_ROOT_PATH, 'train')
+    valid_dir = os.path.join(DS_ROOT_PATH, 'valid')
+    # ==========================================
     
     device = get_device()
     try:
         train_ds, valid_ds = load_datasets(train_dir, valid_dir)
         train_loader, valid_loader = get_dataloaders(train_ds, valid_ds, batch_size=64)
     except Exception as e:
-        logging.error(f"Lỗi khi tải dữ liệu: {e}")
+        # Lỗi tải dữ liệu giờ sẽ chỉ xảy ra nếu thư mục data/ không đúng vị trí tương đối
+        logging.error(f"Lỗi khi tải dữ liệu. Hãy kiểm tra đường dẫn tương đối: {train_dir}. Lỗi: {e}")
         raise
 
     num_classes = len(train_ds.classes)
     logging.info(f"Số lớp: {num_classes}")
     
-    # Lựa chọn các mô hình trích xuất
-    models_to_extract = ['ResNet18', 'MobileNetV2', 'EfficientNet-B0']
+    # Thêm mô hình CNN vào danh sách trích xuất
+    models_to_extract = ['ResNet18', 'MobileNetV2', 'EfficientNet-B0', 'CNN'] 
     
     for model_name in models_to_extract:
         logging.info(f"\n--- Trích xuất đặc trưng từ {model_name} ---")

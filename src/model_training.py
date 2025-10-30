@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 # 1. HÀM ĐỊNH NGHĨA CÁC MÔ HÌNH 
 
 def define_cnn(num_classes: int = 38) -> nn.Module:
-    """Hàm định nghĩa mô hình CNN thuần đơn giản"""
+    """Hàm định nghĩa mô hình CNN thuần đã tối ưu"""
     model = nn.Sequential(
         # Tạo lớp tích chập thứ 1: 3 kênh màu RGB, 32 ánh xạ đặc trưng, giữ kích thước hình ảnh
         nn.Conv2d(3, 32, kernel_size=3, padding=1), 
@@ -56,7 +56,7 @@ def define_cnn(num_classes: int = 38) -> nn.Module:
         nn.Dropout(0.5),
         nn.Linear(256, num_classes)
     )
-    logging.info("Đã định nghĩa mô hình CNN thuần (Tối ưu GAP).")
+    logging.info("Đã định nghĩa mô hình CNN thuần đã tối ưu")
     return model
 
 def define_resnet18(num_classes: int = 38, use_pretrained: bool = True) -> nn.Module:

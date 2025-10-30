@@ -16,11 +16,11 @@ WEB_PLOTS_DIR = PROJECT_ROOT / "web" / "public" / "plots"
 os.makedirs(WEB_DATA_DIR, exist_ok=True)
 os.makedirs(WEB_PLOTS_DIR, exist_ok=True)
 
-# === DANH SÁCH MÔ HÌNH HỖ TRỢ ===
+# định nghĩa danh sách các mô hình
 SUPPORTED_MODELS = ["ResNet18", "MobileNetV2", "EfficientNetB0", "CNN"]
 
-# === 1. ĐỌC EDA SUMMARY (100% TỪ FILE) ===
-eda = {}  # ← KHÔNG CÓ DỮ LIỆU TĨNH
+# đọc file json của phần eda
+eda = {}  
 eda_path = REPORTS_DIR / "eda_summary.json"
 if eda_path.exists():
     try:
@@ -41,7 +41,7 @@ if eda_path.exists():
             "min_count": 1642
         }
 else:
-    print("Warning: eda_summary.json không tồn tại → dùng mặc định")
+    print("Warning: eda_summary.json không tồn tại -> Dùng mặc định")
     eda = {
         "total_samples": 70295,
         "num_classes": 38,
@@ -54,7 +54,7 @@ else:
         "min_count": 1642
     }
 
-# === 2. ĐỌC PLANT TABLE ===
+# Đọc phần plant-table
 plant_table = []
 plant_csv = REPORTS_DIR / "plantDS.csv"
 if plant_csv.exists():
@@ -68,7 +68,7 @@ if plant_csv.exists():
 else:
     print("Warning: plantDS.csv không tồn tại")
 
-# === 3. ĐỌC EVALUATION REPORT ===
+# Đọc báo cáo đánh giá
 models = []
 best_model = None
 eval_report_path = REPORTS_DIR / "evaluation_report.json"
@@ -132,7 +132,7 @@ if best_report_path.exists():
 else:
     print(f"Warning: classification_report_{best_model}.json không tồn tại")
 
-# === 5. COPY PLOTS ===
+# Sao chép biểu đồ
 plots_copied = 0
 if PLOTS_DIR.exists():
     for img_path in PLOTS_DIR.glob("*.png"):
@@ -144,7 +144,7 @@ if PLOTS_DIR.exists():
             print(f"Lỗi copy {img_path.name}: {e}")
 print(f"Đã copy {plots_copied} ảnh → web/public/plots/")
 
-# === 6. TẠO CHARTS PATHS ===
+# Tạo đường dẫn cho biểu đồ
 charts = {
     "f1_per_class": f"/plots/{best_model}_f1_per_class.png",
     "precision_recall": f"/plots/{best_model}_precision_recall.png",
@@ -166,7 +166,7 @@ final_data = {
     "f1_per_class": f1_per_class
 }
 
-# === 8. GHI FILE ===
+# Lưu trữ file vào phần public 
 output_path = WEB_DATA_DIR / "model_data.json"
 try:
     with open(output_path, "w", encoding="utf-8") as f:
