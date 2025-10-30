@@ -1,0 +1,43 @@
+# ------------------------------------
+# 1. PYTHON & MÔI TRƯỜNG ẢO
+# ------------------------------------
+venv/
+__pycache__/
+*.pyc
+*.log
+
+# ------------------------------------
+# 2. CÁC THƯ MỤC LỚN VÀ KẾT QUẢ (ĐÃ NÉN VÀ ĐẨY LÊN DRIVE)
+# ------------------------------------
+# Dataset (Sử dụng tên thư mục chính xác: Data/)
+data/
+
+# Dữ liệu trung gian và mô hình
+features/
+models/
+
+# Kết quả đánh giá
+plots/
+reports/
+
+# File nén (Đã được đẩy lên Drive)
+*.rar
+*.zip
+*.7z
+
+# ------------------------------------
+# 3. NODE.JS / NEXT.JS
+# ------------------------------------
+# Dependencies
+/node_modules
+web/node_modules
+
+# Next.js Build files
+web/.next/
+web/out/
+web/build
+
+# File môi trường và cache
+.env
+.env.local
+.DS_Store

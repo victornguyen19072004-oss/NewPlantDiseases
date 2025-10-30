@@ -1,0 +1,11 @@
+Flask==3.1.2
+flask_cors==6.0.1
+grad_cam==1.5.5
+matplotlib==3.10.7
+numpy==2.3.4
+pandas==2.3.3
+Pillow==12.0.0
+scikit_learn==1.7.2
+seaborn==0.13.2
+torch==2.9.0
+torchvision==0.24.0

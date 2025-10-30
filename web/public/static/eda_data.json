@@ -1,0 +1,400 @@
+{
+  "total_train": 70295,
+  "total_valid": 17572,
+  "num_classes": 38,
+  "imbalance_ratio": "4:1",
+  "plants": [
+    {
+      "name": "Tomato",
+      "num_diseases": 10,
+      "total_images": 15847,
+      "percentage": 18.2,
+      "diseases": [
+        {
+          "name": "Tomato___Bacterial_spot",
+          "description": "Các vết đen nhỏ trên lá, thân và quả",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Tomato___Early_blight",
+          "description": "Các vết tròn nâu với vòng tròn đồng tâm",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Tomato___Late_blight",
+          "description": "Các vết nước xám trên lá và quả",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Tomato___Leaf_Mold",
+          "description": "Các vết vàng trên mặt trên lá, nấm trắng dưới",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Tomato___Septoria_leaf_spot",
+          "description": "Các vết tròn nhỏ với halo vàng",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Tomato___Spider_mites",
+          "description": "Lá có màu vàng nhạt, mạng nhện mỏng",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Tomato___Target_Spot",
+          "description": "Các vết tròn với vòng tròn đồng tâm",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Tomato___Tomato_mosaic_virus",
+          "description": "Lá có mô tả không đều, cuộn lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+          "description": "Lá vàng, cuộn lá, cây bị teo",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Tomato___healthy",
+          "description": "Cây cà chua khỏe mạnh, không có bệnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Potato",
+      "num_diseases": 3,
+      "total_images": 6279,
+      "percentage": 7.2,
+      "diseases": [
+        {
+          "name": "Potato___Early_blight",
+          "description": "Các vết nâu tròn với vòng tròn đồng tâm",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Potato___Late_blight",
+          "description": "Các vết nước xám trên lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Potato___healthy",
+          "description": "Cây khoai tây khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Pepper",
+      "num_diseases": 2,
+      "total_images": 4412,
+      "percentage": 5.1,
+      "diseases": [
+        {
+          "name": "Pepper,_bell___Bacterial_spot",
+          "description": "Các vết đen nhỏ trên lá và quả",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Pepper,_bell___healthy",
+          "description": "Ớt chuông khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Corn",
+      "num_diseases": 4,
+      "total_images": 8267,
+      "percentage": 9.5,
+      "diseases": [
+        {
+          "name": "Corn_(maize)___Cercospora_leaf_spot",
+          "description": "Các vết tròn xám trên lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Corn_(maize)___Common_rust",
+          "description": "Các vết nổi màu cam trên lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Corn_(maize)___Northern_Leaf_Blight",
+          "description": "Các vết hình chữ nhật xám trên lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Corn_(maize)___healthy",
+          "description": "Cây ngô khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Grape",
+      "num_diseases": 4,
+      "total_images": 7169,
+      "percentage": 8.2,
+      "diseases": [
+        {
+          "name": "Grape___Black_rot",
+          "description": "Các vết tròn đen trên lá và quả",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Grape___Esca_(Black_Measles)",
+          "description": "Các vết đỏ trên lá, gỗ bị hoại tử",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)",
+          "description": "Các vết nâu trên lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Grape___healthy",
+          "description": "Cây nho khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Apple",
+      "num_diseases": 4,
+      "total_images": 6608,
+      "percentage": 7.6,
+      "diseases": [
+        {
+          "name": "Apple___Apple_scab",
+          "description": "Các vết nâu tròn trên lá và quả",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Apple___Black_rot",
+          "description": "Các vết tròn đen trên quả",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Apple___Cedar_apple_rust",
+          "description": "Các vết vàng cam trên lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Apple___healthy",
+          "description": "Cây táo khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Blueberry",
+      "num_diseases": 1,
+      "total_images": 2986,
+      "percentage": 3.4,
+      "diseases": [
+        {
+          "name": "Blueberry___healthy",
+          "description": "Cây việt quất khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Cherry",
+      "num_diseases": 2,
+      "total_images": 3228,
+      "percentage": 3.7,
+      "diseases": [
+        {
+          "name": "Cherry_(including_sour)___Powdery_mildew",
+          "description": "Lớp bột trắng trên lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Cherry_(including_sour)___healthy",
+          "description": "Cây anh đào khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Peach",
+      "num_diseases": 2,
+      "total_images": 3679,
+      "percentage": 4.2,
+      "diseases": [
+        {
+          "name": "Peach___Bacterial_spot",
+          "description": "Các vết đen nhỏ trên lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        },
+        {
+          "name": "Peach___healthy",
+          "description": "Cây đào khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Orange",
+      "num_diseases": 1,
+      "total_images": 2611,
+      "percentage": 3.0,
+      "diseases": [
+        {
+          "name": "Orange___Haunglongbing_(Citrus_greening)",
+          "description": "Lá vàng không đều, quả nhỏ",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Raspberry",
+      "num_diseases": 1,
+      "total_images": 2292,
+      "percentage": 2.6,
+      "diseases": [
+        {
+          "name": "Raspberry___healthy",
+          "description": "Cây mâm xôi khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Soybean",
+      "num_diseases": 1,
+      "total_images": 2890,
+      "percentage": 3.3,
+      "diseases": [
+        {
+          "name": "Soybean___healthy",
+          "description": "Cây đậu tương khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Squash",
+      "num_diseases": 1,
+      "total_images": 2431,
+      "percentage": 2.8,
+      "diseases": [
+        {
+          "name": "Squash___Powdery_mildew",
+          "description": "Lớp bột trắng trên lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Strawberry",
+      "num_diseases": 1,
+      "total_images": 2195,
+      "percentage": 2.5,
+      "diseases": [
+        {
+          "name": "Strawberry___Leaf_scorch",
+          "description": "Các vết đỏ trên lá",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    },
+    {
+      "name": "Wheat",
+      "num_diseases": 1,
+      "total_images": 2681,
+      "percentage": 3.1,
+      "diseases": [
+        {
+          "name": "Wheat___healthy",
+          "description": "Cây lúa mì khỏe mạnh",
+          "sample_image": "/placeholder.svg?height=256&width=256"
+        }
+      ]
+    }
+  ],
+  "classes": [
+    { "name": "Apple___Apple_scab", "train_count": 1980, "valid_count": 495 },
+    { "name": "Apple___Black_rot", "train_count": 2316, "valid_count": 579 },
+    { "name": "Apple___Cedar_apple_rust", "train_count": 1440, "valid_count": 360 },
+    { "name": "Apple___healthy", "train_count": 1873, "valid_count": 468 },
+    { "name": "Blueberry___healthy", "train_count": 2389, "valid_count": 597 },
+    { "name": "Cherry_(including_sour)___Powdery_mildew", "train_count": 1987, "valid_count": 496 },
+    { "name": "Cherry_(including_sour)___healthy", "train_count": 1623, "valid_count": 405 },
+    { "name": "Corn_(maize)___Cercospora_leaf_spot", "train_count": 2145, "valid_count": 536 },
+    { "name": "Corn_(maize)___Common_rust", "train_count": 2234, "valid_count": 558 },
+    { "name": "Corn_(maize)___Northern_Leaf_Blight", "train_count": 1876, "valid_count": 469 },
+    { "name": "Corn_(maize)___healthy", "train_count": 2012, "valid_count": 503 },
+    { "name": "Grape___Black_rot", "train_count": 2156, "valid_count": 539 },
+    { "name": "Grape___Esca_(Black_Measles)", "train_count": 1834, "valid_count": 458 },
+    { "name": "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)", "train_count": 1945, "valid_count": 486 },
+    { "name": "Grape___healthy", "train_count": 2234, "valid_count": 558 },
+    { "name": "Orange___Haunglongbing_(Citrus_greening)", "train_count": 2089, "valid_count": 522 },
+    { "name": "Peach___Bacterial_spot", "train_count": 1756, "valid_count": 439 },
+    { "name": "Peach___healthy", "train_count": 1923, "valid_count": 480 },
+    { "name": "Pepper,_bell___Bacterial_spot", "train_count": 2145, "valid_count": 536 },
+    { "name": "Pepper,_bell___healthy", "train_count": 2267, "valid_count": 566 },
+    { "name": "Potato___Early_blight", "train_count": 2034, "valid_count": 508 },
+    { "name": "Potato___Late_blight", "train_count": 2156, "valid_count": 539 },
+    { "name": "Potato___healthy", "train_count": 2089, "valid_count": 522 },
+    { "name": "Raspberry___healthy", "train_count": 1834, "valid_count": 458 },
+    { "name": "Soybean___healthy", "train_count": 2312, "valid_count": 578 },
+    { "name": "Squash___Powdery_mildew", "train_count": 1945, "valid_count": 486 },
+    { "name": "Strawberry___Leaf_scorch", "train_count": 1756, "valid_count": 439 },
+    { "name": "Tomato___Bacterial_spot", "train_count": 2145, "valid_count": 536 },
+    { "name": "Tomato___Early_blight", "train_count": 2089, "valid_count": 522 },
+    { "name": "Tomato___Late_blight", "train_count": 1987, "valid_count": 496 },
+    { "name": "Tomato___Leaf_Mold", "train_count": 1834, "valid_count": 458 },
+    { "name": "Tomato___Septoria_leaf_spot", "train_count": 2012, "valid_count": 503 },
+    { "name": "Tomato___Spider_mites", "train_count": 1876, "valid_count": 469 },
+    { "name": "Tomato___Target_Spot", "train_count": 2156, "valid_count": 539 },
+    { "name": "Tomato___Tomato_mosaic_virus", "train_count": 1945, "valid_count": 486 },
+    { "name": "Tomato___Tomato_Yellow_Leaf_Curl_Virus", "train_count": 2234, "valid_count": 558 },
+    { "name": "Tomato___healthy", "train_count": 2389, "valid_count": 597 },
+    { "name": "Wheat___healthy", "train_count": 2145, "valid_count": 536 },
+    { "name": "Background", "train_count": 1623, "valid_count": 405 }
+  ],
+  "image_dimensions": {
+    "widths": [
+      256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256,
+      256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256,
+      256, 256, 256, 256
+    ],
+    "heights": [
+      256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256,
+      256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256, 256,
+      256, 256, 256, 256
+    ],
+    "width_mean": 256,
+    "width_median": 256,
+    "height_mean": 256,
+    "height_median": 256
+  },
+  "sample_images": [
+    { "class_name": "Apple___Apple_scab", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Apple___Black_rot", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Apple___Cedar_apple_rust", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Apple___healthy", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Blueberry___healthy", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Cherry___Powdery_mildew", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Corn___Cercospora_leaf_spot", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Grape___Black_rot", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Orange___Haunglongbing", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Pepper___Bacterial_spot", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Potato___Late_blight", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Tomato___healthy", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Tomato___Early_blight", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Tomato___Mosaic_virus", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Wheat___healthy", "image_url": "/placeholder.svg?height=256&width=256" },
+    { "class_name": "Background", "image_url": "/placeholder.svg?height=256&width=256" }
+  ],
+  "top_classes": [
+    { "class_name": "Tomato___healthy", "total_count": 2986, "percentage": 3.4 },
+    { "class_name": "Blueberry___healthy", "total_count": 2986, "percentage": 3.4 },
+    { "class_name": "Soybean___healthy", "total_count": 2890, "percentage": 3.3 },
+    { "class_name": "Apple___Black_rot", "total_count": 2895, "percentage": 3.3 },
+    { "class_name": "Grape___healthy", "total_count": 2792, "percentage": 3.2 }
+  ]
+}
