@@ -1,0 +1,31 @@
+name: Build Flutter iOS (lab309)
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:   # Cho phép chạy thủ công
+
+jobs:
+  build-ios:
+    runs-on: macos-14     # Bắt buộc dùng Mac để build iOS
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build iOS (no codesign - for personal test)
+        run: flutter build ios --release --no-codesign
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab309-ipa
+          path: build/ios/ipa/*.ipa
+          retention-days: 7
